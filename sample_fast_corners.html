@@ -211,6 +211,35 @@
                             for (var p=(i+lastSuccess)/2; p<step*480; p+=step) {
                                 img[p] = red;
                             }
+                            var divider = i;
+                            
+                            var leftTally = [];
+                            var leftTally2 = [];
+                            var rightTally = [];
+                            var rightTally2 = [];
+                            
+                            for (var j=0; j<step; j++) {
+                                leftTally[j] = 0;
+                                rightTally[j] = 0;
+                                if (j < 480) {
+                                    leftTally2[j] = 0;
+                                    rightTally2[j] = 0;
+                                }
+                            }
+                            
+                            for(var u=0; u < count; ++u) {
+                                var x = corners[u].x;
+                                var y = corners[u].y;
+                                
+                                if (x < divider) {
+                                    leftTally[x]++;
+                                    leftTally2[y]++;
+                                } else {
+                                    rightTally[x]++;
+                                    rightTally2[y]++;
+                                }
+                                
+                            }
                         }
                         lastSuccess = i;
                         for (var p=i; p<step*480; p+=step) {
