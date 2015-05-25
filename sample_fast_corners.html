@@ -158,7 +158,8 @@
                     $('#log').html(stat.log());
                 }
             }
-
+            
+            var lastTally;
             function render_corners(corners, count, img, step) {
                 var green = (0xff << 24) | (0x00 << 16) | (0xff << 8) | 0x00;
                 var red = (0xff << 24) | (0x00 << 16) | (0x00 << 8) | 0xff;
@@ -167,6 +168,10 @@
                 var tally = [];
                 for (var i=0; i<step; i++) {
                     tally[i] = 0;
+                }
+                
+                if (!lastTally) {
+                    lastTally = tally;
                 }
                 
                 var lastCorner = corners[corners.length-1];
@@ -191,12 +196,14 @@
                 }
                 
                 for (var i=0; i<step; i++) {
-                    if (tally[i]>10) {
+                    if (tally[i] + lastTally[i] >20) {
                         for (var p=i; p<step*480; p+=step) {
                             img[p] = blue;
                         }
                     }
                 }
+                
+                lastTally = tally;
             }
 
             $(window).unload(function() {
