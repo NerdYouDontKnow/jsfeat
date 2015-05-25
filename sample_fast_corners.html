@@ -173,6 +173,9 @@
                     if (y == lastCorner.y || y == lastCorner.x) {
                         pix = red;
                     }
+                    
+                    lastCorner = corners[i];
+                    
                     var off = (x + y * step);
                     img[off] = pix;
                     img[off-1] = pix;
