@@ -165,7 +165,7 @@
                 var blue = (0xff << 24) | (0xff << 16) | (0x00 << 8) | 0x00;
                 
                 var tally = [];
-                for (var i=0; i<480; i++) {
+                for (var i=0; i<step; i++) {
                     tally[i] = 0;
                 }
                 
@@ -174,7 +174,7 @@
                 {
                     var x = corners[i].x;
                     var y = corners[i].y;
-                    tally[y]++;
+                    tally[x]++;
                     var pix = green;
                     if (y == lastCorner.y || y == lastCorner.x) {
                         pix = red;
@@ -190,9 +190,9 @@
                     img[off+step] = pix;
                 }
                 
-                for (var i=0; i<480; i++) {
+                for (var i=0; i<step; i++) {
                     if (tally[i] + tally[i-1] + tally[i+1] >30) {
-                        for (var p=i*step; p<(i+1)*step; p++) {
+                        for (var p=i; p<step*480; p+=step) {
                             img[p] = blue;
                         }
                     }
