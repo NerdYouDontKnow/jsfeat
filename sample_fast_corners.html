@@ -160,11 +160,19 @@
             }
 
             function render_corners(corners, count, img, step) {
-                var pix = (0xff << 24) | (0x00 << 16) | (0xff << 8) | 0x00;
+                var green = (0xff << 24) | (0x00 << 16) | (0xff << 8) | 0x00;
+                var red = (0x00 << 24) | (0xff << 16) | (0x00 << 8) | 0x00;
+                
+                var lastCorner = corners[corners.length-1];
                 for(var i=0; i < count; ++i)
                 {
                     var x = corners[i].x;
                     var y = corners[i].y;
+                    
+                    var pix = green;
+                    if (y == lastCorner.y || y=lastCorner.x) {
+                        pix = red;
+                    }
                     var off = (x + y * step);
                     img[off] = pix;
                     img[off-1] = pix;
