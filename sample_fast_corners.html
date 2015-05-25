@@ -200,8 +200,18 @@
                     img[off+step] = pix;
                 }
                 
+                var lastSuccess;
                 for (var i=0; i<step; i++) {
                     if (tally[i] + lastTally[i] >15) {
+                        if (!lastSuccess) {
+                            lastSuccess = i;
+                        }
+                        
+                        if (i - lastSuccess > 20) {
+                            for (var p=(i+lastSuccess)/2; p<step*480; p+=step) {
+                                img[p] = red;
+                            }
+                        }
                         for (var p=i; p<step*480; p+=step) {
                             img[p] = blue;
                         }
